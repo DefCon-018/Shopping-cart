@@ -1,0 +1,18 @@
+.cart-item{
+  display : flex;
+  margin: 20px auto;
+  width: 70%;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.left-block{
+  width: 30%;
+}
+
+.right-block{
+  width: 60%;
+}
+.details div{
+  font-size: 1.2rem;
+}
