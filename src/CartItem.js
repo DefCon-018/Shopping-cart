@@ -1,7 +1,16 @@
 import React from 'react';
 
 class CartItem extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            title: 'Phone',
+            price: 999,
+            qty: 1
+        }
+    }
     render(){
+        const {title, price, qty} = this.state;
         return(
             <div className= "cart-item">
                 <div className= "left-block">
@@ -9,14 +18,14 @@ class CartItem extends React.Component{
                 </div>
                 <div className= "right-block">
                     <div className= "details">
-                        <div>Phone</div>
-                        <div>Rs: 9999</div>
-                        <div>Qty: 1</div>
+                        <div>{this.state.title}</div>
+                        <div style= {{color: '#777' }}>Rs: {price}</div>
+                        <div style= {{color: '#777'}}>Qty: {qty}</div>
                     </div>
-                    <div className= "cart-actions">
-                        <div className= "actions">
-
-                        </div>
+                    <div className= "cart-item-action">
+                        <img className="action-icons" src= "https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615435384~hmac=6dcb8db865768cab5785929207db546f"></img>
+                        <img className= "action-icons" src= "https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615435219~hmac=353a916b541a15a8b43a52ca0cc2e100"></img>
+                        <img className= "action-icons" src= "https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615435441~hmac=36322956844b8ddf85f18d043e6047ef"></img>
                     </div>
                 </div>
             </div>
@@ -28,7 +37,7 @@ const styles = {
     image: {
         width: 110,
         height: 110,
-        backgroundColor: 'gray'
+        padding: 20
     }
 }
 

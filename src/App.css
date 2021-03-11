@@ -1,8 +1,9 @@
 .cart-item{
   display : flex;
   margin: 20px auto;
-  width: 70%;
+  width: 40%;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid black;
 }
 
@@ -14,5 +15,17 @@
   width: 60%;
 }
 .details div{
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+}
+.details{
+  padding: 10px;
+}
+
+.action-icons{
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+}
+.action-icons:hover{
+  cursor: pointer;
 }
