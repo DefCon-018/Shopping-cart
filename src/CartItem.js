@@ -30,6 +30,7 @@ class CartItem extends React.Component{
         const {title, price, qty} = this.props.product;
         // console.log(this.props);
         // console.log(this.props.func());
+        const {product, onDeleteProduct, onDecreaseQty, onIncreaseQty} = this.props
         return(
             <div className= "cart-item">
                 <div className= "left-block">
@@ -44,13 +45,15 @@ class CartItem extends React.Component{
                     <div className= "cart-item-action">
                         <img className="action-icons" 
                              src= "https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1615435384~hmac=6dcb8db865768cab5785929207db546f"
-                             onClick= {()=>{this.props.onIncreaseQty(this.props.product)}} >
+                             onClick= {()=>{onIncreaseQty(product)}} >
                         </img>
                         <img className= "action-icons" 
                             src= "https://www.flaticon.com/svg/vstatic/svg/992/992683.svg?token=exp=1615435219~hmac=353a916b541a15a8b43a52ca0cc2e100"
-                            onClick= {() => {this.props.onDecreaseQty(this.props.product)}} >
+                            onClick= {() => {onDecreaseQty(product)}} >
                         </img>
-                        <img className= "action-icons" src= "https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615435441~hmac=36322956844b8ddf85f18d043e6047ef"></img>
+                        <img className= "action-icons" 
+                             src= "https://www.flaticon.com/svg/vstatic/svg/3096/3096673.svg?token=exp=1615435441~hmac=36322956844b8ddf85f18d043e6047ef"
+                             onClick= {() => {onDeleteProduct(product.id)}}></img>
                     </div>
                 </div>
             </div>
