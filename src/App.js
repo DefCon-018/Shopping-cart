@@ -2,34 +2,14 @@ import React from 'react';
 import './App.css';
 import Cart from './Cart';
 import Navbar from './Navbar';
+import firebase from 'firebase/app';
 
 class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      products: [  
-      {
-            title: 'Mobile phone',
-            price: 10000,
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1567581935884-3349723552ca?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80',
-            id: 1
-        },
-        {
-            title: 'Watch',
-            price: 100,
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1461141346587-763ab02bced9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1248&q=80',
-            id: 2
-        },
-        {
-            title: 'Laptop',
-            price: 99999,
-            qty: 1,
-            img: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
-            id: 3
-        },
-      ]
+      products: [],
+      loading: true
     }
   }
   handleIncreaseQuantity = (product) => {
@@ -74,11 +54,37 @@ class App extends React.Component {
     products.forEach((product) =>{
       total += product.qty * product.price
     })
+    // console.log(total);
     return total;
   }
 
+  componentDidMount(){
+    console.log("Component did mount")
+    firebase
+    .firestore()
+    .collection('Products')
+    .onSnapshot((snapshot)=>{
+      // console.log(snapshot);
+      let products = snapshot.docs.map((doc)=>{
+        const data = doc.data();
+        data['id'] = doc.id;
+        return data;
+      })
+      console.log(products);
+      this.setState({
+        products,
+        loading: false
+      })
+    })
+  }
+
+  // componentDidUpdate(){
+  //   // console.log('Component did update');
+  // }
+
   render(){
-    const {products} = this.state;
+    // console.log("Render");
+    const {products, loading} = this.state;
     return (
       <div className="App" style= {styles.container}>
         <Navbar count= {this.getProductCount()}/>
@@ -87,6 +93,7 @@ class App extends React.Component {
               onDecreaseQty = {this.handleDecreaseQuantity}
               onDeleteProduct = {this.handleDeleteProduct}          
         />
+        {loading && <h1>Loading Products...</h1>}
         <div style= {{margin: '10px'}}>
           <span style= {{fontWeight: 700, fontSize: '1.3rem'}}>TOTAL</span> : <span style= {{fontWeight: 500, fontSize: '1.3rem'}}>{this.getTotalPrice()}</span>
         </div>
