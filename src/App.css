@@ -1,10 +1,16 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
 .cart-item{
   display : flex;
-  margin: 20px auto;
+  margin: 20px;
   width: 40%;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
+  border-bottom: 1px solid gray;
 }
 
 .left-block{
